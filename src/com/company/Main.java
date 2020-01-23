@@ -39,6 +39,7 @@ public class Main {
                     System.out.println("\t * " + nom + " " + result.getString("prof_prenom") + " enseigne : ");
                 }
                 System.out.println("\t\t\t - " +  result.getString("mat_nom"));
+                System.out.println("\t\t\t - " +  result.getString("test_git"));
             }
 
             result.close();
