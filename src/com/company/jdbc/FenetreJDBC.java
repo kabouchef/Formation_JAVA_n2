@@ -32,7 +32,7 @@ public class FenetreJDBC extends JFrame {
     /**
      * Requête par défaut pour le démarrage
      */
-    private String requete = "SELECT  * FROM classe";
+    private String requete = "SELECT XML_CONF FROM T_CONF_STORAGE WHERE CONF_ID = '20200129S51509'";
 
     /**
      * Le composant dans lequel taper la requête
@@ -44,7 +44,7 @@ public class FenetreJDBC extends JFrame {
      */
     public FenetreJDBC() {
         setSize(900, 600);
-        setTitle("TEST JDBC");
+        setTitle("TESTEUR JDBC");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -89,7 +89,8 @@ public class FenetreJDBC extends JFrame {
         try {
             //On crée un statement
             long start = System.currentTimeMillis();
-            Statement state = SdzConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            /*Statement state = SdzConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);*/
+            Statement state = ConnectionLMFR.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             //On exécute la requête
             ResultSet res = state.executeQuery(query);
