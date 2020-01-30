@@ -30,12 +30,14 @@ public class XmlWriter {
 
             XmlReader xmlReader = new XmlReader();
             codeOffre = xmlReader.XmlReader();
-            Path cible = Paths.get("xml/" + codeOffre + ".xml");
+            // Get the file
+            String path = "xml/" + codeOffre + ".xml";
+            File copiedFile = new File(path);
+            Path cible = Paths.get(path);
 
             Files.copy(source, cible, StandardCopyOption.REPLACE_EXISTING);
 
-            // Get the file
-            File copiedFile = new File(codeOffre+".xml");
+
 
             // Check if the specified file
             // Exists or not
