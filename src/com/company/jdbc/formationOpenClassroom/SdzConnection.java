@@ -1,25 +1,26 @@
-package com.company.jdbc;
+package com.company.jdbc.formationOpenClassroom;
 
-import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class OapV2Connection {
+
+import javax.swing.JOptionPane;
+
+public class SdzConnection{
+
     /**
      * URL de connection
      */
-    private static String url = "jdbc:postgresql://pg-postgres-hmbu-d-oap.aivencloud.com:12833/oap_data?sslmode=require";
+    private static String url = "jdbc:postgresql://localhost:5432/Ecole";
 
     /**
      * Nom du user
      */
-    private static String user = "oap_data";
+    private static String user = "postgres";
 
     /**
      * Mot de passe du user
      */
-    private static String passwd = "smiq4tflouwxdeis";
+    private static String passwd = "postgres";
 
     /**
      * Objet Connection

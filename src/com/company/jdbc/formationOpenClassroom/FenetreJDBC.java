@@ -1,4 +1,6 @@
-package com.company.jdbc;
+package com.company.jdbc.formationOpenClassroom;
+
+import com.company.jdbc.oapV2.OapV2Connection;
 
 import javax.swing.*;
 import java.awt.*;

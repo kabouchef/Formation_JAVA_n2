@@ -1,4 +1,4 @@
-package com.company.jdbc;
+package com.company.jdbc.lmfr;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -38,8 +38,7 @@ public class SimulationOffer {
             while (res.next()) {
                 for (int i = 1; i <= meta.getColumnCount(); i++) {
                     data[j - 1][i - 1] = res.getObject(i);
-                    //Retrieving the data
-                    System.out.println("Contents of the table are: ");
+
                     /*System.out.println("XML_CONF : " + res.getString("XML_CONF"));*/
                     Clob clob = res.getClob("XML_CONF");
                     Reader r = clob.getCharacterStream();
@@ -48,9 +47,11 @@ public class SimulationOffer {
                     while ((ch = r.read()) != -1) {
                         buffer.append("" + (char) ch);
                     }
-                    System.out.println("Contents: " + buffer.toString());
-                    WritingXML writingXML = new WritingXML(buffer.toString());
-                    System.out.println(" ");
+                    XmlWriter writingXML = new XmlWriter(buffer.toString());
+
+                    /*System.out.println("Contents: " + buffer.toString());*/
+
+                    /*System.out.println(" ");*/
                 }
                 j++;
             }

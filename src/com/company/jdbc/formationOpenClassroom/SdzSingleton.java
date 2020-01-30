@@ -1,4 +1,4 @@
-package com.company.jdbc;
+package com.company.jdbc.formationOpenClassroom;
 
 public class SdzSingleton {
     //Le singleton

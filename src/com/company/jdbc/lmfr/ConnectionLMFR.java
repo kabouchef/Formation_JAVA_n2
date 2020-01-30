@@ -1,4 +1,6 @@
-package com.company.jdbc;
+package com.company.jdbc.lmfr;
+
+import com.company.jdbc.serveurs.ServerLMFR;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -10,17 +12,17 @@ public class ConnectionLMFR {
     /**
      * URL de connection
      */
-    private static String url = "jdbc:oracle:thin:@rfrlmdboaag01:1521:roaag01";
+    private static String url = ServerLMFR.RECETTE_REEL.getUrl();
 
     /**
      * Nom du user
      */
-    private static String user = "oaa";
+    private static String user = ServerLMFR.RECETTE_REEL.getUser();
 
     /**
      * Mot de passe du user
      */
-    private static String passwd = "oaa";
+    private static String passwd = ServerLMFR.RECETTE_REEL.getPassword();
 
     /**
      * Objet Connection
