@@ -90,7 +90,8 @@ public class FenetreJDBC extends JFrame {
             //On crée un statement
             long start = System.currentTimeMillis();
             /*Statement state = SdzConnection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);*/
-            Statement state = ConnectionLMFR.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Statement state = OapV2Connection.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            /*Statement state = ConnectionLMFR.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);*/
 
             //On exécute la requête
             ResultSet res = state.executeQuery(query);

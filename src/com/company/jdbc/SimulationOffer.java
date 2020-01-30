@@ -1,9 +1,5 @@
 package com.company.jdbc;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.*;
@@ -40,25 +36,26 @@ public class SimulationOffer {
 
             //On remplit le tableau d'Object[][]
             while (res.next()) {
-                for (int i = 1; i <= meta.getColumnCount(); i++){
+                for (int i = 1; i <= meta.getColumnCount(); i++) {
                     data[j - 1][i - 1] = res.getObject(i);
                     //Retrieving the data
                     System.out.println("Contents of the table are: ");
-                    System.out.println("XML_CONF : "+res.getString("XML_CONF"));
+                    /*System.out.println("XML_CONF : " + res.getString("XML_CONF"));*/
                     Clob clob = res.getClob("XML_CONF");
                     Reader r = clob.getCharacterStream();
                     StringBuffer buffer = new StringBuffer();
                     int ch;
-                    while ((ch = r.read())!=-1) {
-                        buffer.append(""+(char)ch);
+                    while ((ch = r.read()) != -1) {
+                        buffer.append("" + (char) ch);
                     }
-                    System.out.println("Contents: "+buffer.toString());
+                    System.out.println("Contents: " + buffer.toString());
+                    WritingXML writingXML = new WritingXML(buffer.toString());
                     System.out.println(" ");
-
                 }
-
                 j++;
             }
+
+
 
             //On ferme le tout
             res.close();
@@ -66,21 +63,10 @@ public class SimulationOffer {
 
             long totalTime = System.currentTimeMillis() - start;
 
-/*            //On enlève le contenu de notre conteneur
-            result.removeAll();
-            //On y ajoute un JTable
-            result.add(new JScrollPane(new JTable(data, column)), BorderLayout.CENTER);
-            result.add(new JLabel("La requête à été exécuter en " + totalTime + " ms et a retourné " + rowCount + " ligne(s)"), BorderLayout.SOUTH);
-            //On force la mise à jour de l'affichage
-            result.revalidate();*/
 
-        } catch (SQLException e) {
-            //Dans le cas d'une exception, on affiche une pop-up et on efface le contenu
-/*            result.removeAll();
-            result.add(new JScrollPane(new JTable()), BorderLayout.CENTER);
-            result.revalidate();
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERREUR ! ", JOptionPane.ERROR_MESSAGE);*/
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
