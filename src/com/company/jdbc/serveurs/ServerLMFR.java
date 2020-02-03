@@ -17,6 +17,10 @@ public enum ServerLMFR {
     private String user = "";
     private String password = "";
 
+    ServerLMFR(String name) {
+        this.name = name;
+    }
+
     ServerLMFR(String name, String url, String user, String password) {
         this.name = name;
         this.url = url;
@@ -43,6 +47,33 @@ public enum ServerLMFR {
     public String toString(){
         return name;
     }
+
+    public static String valueOfName(String value) {
+        String valueName = null;
+        for (ServerLMFR v : ServerLMFR.values())
+            if (v.getName() == value) valueName = v.getUrl();
+        return valueName;
+    }
+    public static String valueOfUrl(String value) {
+        String valueUrl = null;
+        for (ServerLMFR v : ServerLMFR.values())
+            if (v.getName() == value) valueUrl = v.getUrl();
+        return valueUrl;
+    }
+    public static String valueOfUser(String value) {
+        String valueUser = null;
+        for (ServerLMFR v : ServerLMFR.values())
+            if (v.getName() == value) valueUser = v.getUser();
+        return valueUser;
+    }
+    public static String valueOfPassword(String value) {
+        String valuePassword = null;
+        for (ServerLMFR v : ServerLMFR.values())
+            if (v.getName() == value) valuePassword = v.getPassword();
+        return valuePassword;
+    }
+
+
 
 
 }

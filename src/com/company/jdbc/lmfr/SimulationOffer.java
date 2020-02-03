@@ -1,24 +1,50 @@
 package com.company.jdbc.lmfr;
 
+import com.company.jdbc.serveurs.ServerLMFR;
+import com.company.parsingXml.XMLToExcel;
+import org.xml.sax.SAXException;
+
+import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SimulationOffer {
+    public static String simulationCode = "";
 
-    public void SimulationOffer() {
-        System.out.println("ERREUR : Aucune une requête n'a été soumise");
+    public String getSimulationCode() {
+        return simulationCode;
     }
 
-    public void SimulationOffer(String query) {
-        try {
+    public void SimulationOffer() {
 
-            long start = System.currentTimeMillis();
+        /**
+         * Génération de la date actuel au format yyyyMMdd
+         */
+        String format = "yyyyMMdd";
+        SimpleDateFormat formater = new SimpleDateFormat(format);
+        java.util.Date date = new Date();
+
+        /**
+         * Boite de dialogue : Numéro de simulation
+         */
+        simulationCode = JOptionPane.showInputDialog("Numéro de la simulation : ", /*formater.format(date) + "S"*/"20190822S24080");
+
+
+
+        try {
+/*            long start = System.currentTimeMillis();*/
             Statement state = ConnectionLMFR.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            ResultSet res = state.executeQuery(query);
+            /**
+             * Message de récapitulatif : Numéro de simulation et de l'Environnement
+             */
+            JOptionPane.showMessageDialog(null, "La simulation : " + simulationCode + "\nva être extraite de l'environnement de : "+ ConnectionLMFR.environnement, "Identité", JOptionPane.INFORMATION_MESSAGE);
 
-
+            ResultSet res = state.executeQuery("SELECT XML_CONF FROM T_CONF_STORAGE WHERE CONF_ID = '" + simulationCode + "'");
             ResultSetMetaData meta = res.getMetaData();
 
             Object[] column = new Object[meta.getColumnCount()];
@@ -27,7 +53,7 @@ public class SimulationOffer {
                 column[i - 1] = meta.getColumnName(i);
 
             res.last();
-            int rowCount = res.getRow();
+            /*int rowCount = res.getRow();*/
             Object[][] data = new Object[res.getRow()][meta.getColumnCount()];
 
             //On revient au départ
@@ -39,7 +65,6 @@ public class SimulationOffer {
                 for (int i = 1; i <= meta.getColumnCount(); i++) {
                     data[j - 1][i - 1] = res.getObject(i);
 
-                    /*System.out.println("XML_CONF : " + res.getString("XML_CONF"));*/
                     Clob clob = res.getClob("XML_CONF");
                     Reader r = clob.getCharacterStream();
                     StringBuffer buffer = new StringBuffer();
@@ -48,26 +73,24 @@ public class SimulationOffer {
                         buffer.append("" + (char) ch);
                     }
                     XmlWriter writingXML = new XmlWriter(buffer.toString());
-
-                    /*System.out.println("Contents: " + buffer.toString());*/
-
-                    /*System.out.println(" ");*/
                 }
                 j++;
             }
-
-
 
             //On ferme le tout
             res.close();
             state.close();
 
-            long totalTime = System.currentTimeMillis() - start;
-
+            XMLToExcel excel = new XMLToExcel();
+            excel.generateExcel();
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
     }

@@ -10,19 +10,32 @@ import java.sql.SQLException;
 public class ConnectionLMFR {
 
     /**
-     * URL de connection
+     * Boite de dialogue : Environnement
      */
-    private static String url = ServerLMFR.RECETTE_REEL.getUrl();
+    static Object[] choixList = ServerLMFR.values();
+    static String environnement = JOptionPane.showInputDialog(
+            null,
+            "Selectionner l'environnement d'extraction de la simulation :",
+            "Environnement",
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            choixList,
+            choixList[0]).toString();
 
+
+    /**
+     * Nom du url
+     */
+    private static String url = ServerLMFR.valueOfUrl(environnement);
     /**
      * Nom du user
      */
-    private static String user = ServerLMFR.RECETTE_REEL.getUser();
+    private static String user = ServerLMFR.valueOfUser(environnement);
 
     /**
-     * Mot de passe du user
+     * Mot de passe du
      */
-    private static String passwd = ServerLMFR.RECETTE_REEL.getPassword();
+    private static String passwd = ServerLMFR.valueOfPassword(environnement);
 
     /**
      * Objet Connection
@@ -30,9 +43,9 @@ public class ConnectionLMFR {
     private static Connection connect;
 
     /**
-     * Méthode qui va retourner notre instance
+     * Méthode qui va retourner notre instance20200129S51509
      * et la créer si elle n'existe pas...
-     * @return
+     * @return connect
      */
     public static Connection getInstance(){
         if(connect == null){
