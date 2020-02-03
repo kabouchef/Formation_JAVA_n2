@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.jdbc.lmfr.SimulationOffer;
+import com.company.xmlToExcel.XMLToExcel;
 
 import java.sql.SQLException;
 
@@ -11,6 +12,9 @@ public class Main {
 
         SimulationOffer req = new SimulationOffer();
         req.SimulationOffer();
+
+/*        XMLToExcel test = new XMLToExcel();
+        test.generateExcel();*/
 
 
     }

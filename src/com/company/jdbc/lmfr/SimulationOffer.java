@@ -1,7 +1,6 @@
 package com.company.jdbc.lmfr;
 
-import com.company.jdbc.serveurs.ServerLMFR;
-import com.company.parsingXml.XMLToExcel;
+import com.company.xmlToExcel.XMLToExcel;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
@@ -31,7 +30,7 @@ public class SimulationOffer {
         /**
          * Boite de dialogue : Numéro de simulation
          */
-        simulationCode = JOptionPane.showInputDialog("Numéro de la simulation : ", /*formater.format(date) + "S"*/"20190822S24080");
+        simulationCode = JOptionPane.showInputDialog("Numéro de la simulation : ", /*formater.format(date) + "S"*/"20200203S86787");
 
 
 
